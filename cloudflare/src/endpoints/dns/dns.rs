@@ -152,13 +152,24 @@ pub enum ListDnsRecordsOrder {
 pub struct ListDnsRecordsParams {
     #[serde(flatten)]
     pub record_type: Option<DnsContent>,
-    pub name: Option<String>,
+    pub name: Option<ListDnsRecordsParamsName>,
     pub page: Option<u32>,
     pub per_page: Option<u32>,
     pub order: Option<ListDnsRecordsOrder>,
     pub direction: Option<OrderDirection>,
     #[serde(rename = "match")]
     pub search_match: Option<SearchMatch>,
+}
+
+#[serde_with::skip_serializing_none]
+#[derive(Serialize, Clone, Debug, Default)]
+pub struct ListDnsRecordsParamsName {
+    pub contains: Option<String>,
+    #[serde(rename = "startswith")]
+    pub starts_with: Option<String>,
+    #[serde(rename = "endswith")]
+    pub ends_with: Option<String>,
+    pub exact: Option<String>,
 }
 
 /// Extra Cloudflare-specific information about the record
