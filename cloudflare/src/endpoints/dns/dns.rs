@@ -152,7 +152,6 @@ pub enum ListDnsRecordsOrder {
 pub struct ListDnsRecordsParams {
     #[serde(flatten)]
     pub record_type: Option<DnsContent>,
-    #[serde(flatten)]
     pub name: Option<ListDnsRecordsParamsName>,
     pub page: Option<u32>,
     pub per_page: Option<u32>,
@@ -165,13 +164,11 @@ pub struct ListDnsRecordsParams {
 #[serde_with::skip_serializing_none]
 #[derive(Serialize, Clone, Debug, Default)]
 pub struct ListDnsRecordsParamsName {
-    #[serde(rename = "name.contains")]
     pub contains: Option<String>,
-    #[serde(rename = "name.startswith")]
+    #[serde(rename = "startswith")]
     pub starts_with: Option<String>,
-    #[serde(rename = "name.endswith")]
+    #[serde(rename = "endswith")]
     pub ends_with: Option<String>,
-    #[serde(rename = "name.exact")]
     pub exact: Option<String>,
 }
 
